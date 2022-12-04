@@ -57,7 +57,7 @@ phases:
       - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $REGISTRY_URL
       - echo Push to ECR
       - docker push $REGISTRY_URL/$IMAGE_NAME:$TAG
-      - helm upgrade --wait --install $IMAGE_NAME maven-helm-postgres
+      - helm upgrade --wait --install $REGISTRY_URL/$IMAGE_NAME maven-helm-postgres
       - echo Cleaning up
       - docker image prune -af
 
