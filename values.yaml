@@ -1,0 +1,31 @@
+replicaCount: 1
+
+image:
+  repository: 849514089141.dkr.ecr.us-west-2.amazonaws.com/maven-helm-postgres
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  # type: NodePort
+  type: LoadBalancer
+  targetPort: 5000
+  port: 8080
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
