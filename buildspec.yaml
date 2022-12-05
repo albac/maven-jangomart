@@ -36,7 +36,7 @@ phases:
       - echo Build started on `date`
       - docker login -u $DOCKER_USER -p $DOCKER_PASS
       - docker build -t $IMAGE_NAME .
-      - docker tag $IMAGE_NAME:$TAG $REGISTRY_URL/$IMAGE_NAME:$TAG
+      - docker tag $IMAGE_NAME $REGISTRY_URL/$IMAGE_NAME:$TAG
   post_build:
     commands:
       - CREDENTIALS=$(aws sts assume-role --role-arn $ADMIN_ROLE --role-session-name codebuild-kubectl --duration-seconds 900)
