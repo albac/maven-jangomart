@@ -6,7 +6,7 @@ const app = express();
 const port = 5000;
 
 console.log("The value of User is:", process.env.POSTGRES_USER);
-console.log("The value of DB is:", process.env.POSTGRES_HOST);
+console.log("The value of HOST is:", process.env.POSTGRES_HOST);
 console.log("The value of DB is:", process.env.POSTGRES_DBNAME);
 
 const client = new Client({

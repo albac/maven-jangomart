@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: postgres-configmap
 data:
-  postgres-host: postgres-service:5432
+  postgres-host: postgres-service
   postgres-dbname: api
