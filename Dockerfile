@@ -1,13 +1,13 @@
-FROM python:3.10-buster
+FROM node
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
-COPY requirements.txt .
+COPY package*.json .
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN npm install
 
-COPY prime.py .
+COPY server.js .
 
 EXPOSE 5000
 
-ENTRYPOINT [ "python", "./prime.py"]
+ENTRYPOINT [ "npm", "run", "start"]
