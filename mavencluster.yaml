@@ -3,14 +3,14 @@ apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
 metadata:
-  name: maven-jangomart
+  name: jangomart
   region: us-west-2
   version: "1.21"
 
 managedNodeGroups:
   - name: managedprimary
-    desiredCapacity: 2
-    instanceType: t3.micro
+    desiredCapacity: 3
+    instanceType: t3.small
     ssh:
       enableSsm: true
 
@@ -18,3 +18,6 @@ managedNodeGroups:
 cloudWatch:
   clusterLogging:
     enableTypes: ["*"]
+
+secretsEncryption:
+  keyARN: arn:aws:kms:us-west-2:849514089141:key/d9752f5c-bb41-4683-96dc-dae40258d12a

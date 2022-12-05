@@ -11,4 +11,3 @@ COPY prime.py .
 EXPOSE 5000
 
 ENTRYPOINT [ "python", "./prime.py"]
-
