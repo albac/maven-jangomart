@@ -14,6 +14,26 @@ const client = new Client({
   host: process.env.POSTGRES_DBNAME,
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+app.use(express.static("public"));
+
+app.get("/employees", async (req, res) => {
+  const results = await client
+    .query("SELECT * FROM employees")
+    .then((payload) => {
+      return payload.rows;
+    })
+    .catch(() => {
+      throw new Error("Query failed");
+    });
+  res.setHeader("Content-Type", "application/json");
+  res.status(200);
+  res.send(JSON.stringify(results));
 });
+
+(async () => {
+  await client.connect();
+
+  app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`);
+  });
+})();

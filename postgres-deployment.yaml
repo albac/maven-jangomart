@@ -14,32 +14,51 @@ spec:
       labels:
         app: postgres
     spec:
+      volumes:
+        - name: pg-initdb
+          configMap:
+            name: pg-initdb-config
       containers:
-      - name: postgres
-        image: postgres:latest
-        ports:
-        - containerPort: 80
-        env:
-        - name: POSTGRES_USER
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: postgres-user
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: postgres-password
-        - name: POSTGRES_HOST
-          valueFrom:
-            configMapKeyRef:
-              name: postgres-configmap
-              key: postgres-host
-        - name: POSTGRES_DBNAME
-          valueFrom:
-            configMapKeyRef:
-              name: postgres-configmap
-              key: postgres-dbname
+        - name: postgres
+          image: postgres:latest
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: pg-initdb
+              mountPath: /docker-entrypoint-initdb.d
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: postgres-user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: postgres-password
+            - name: POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-configmap
+                  key: postgres-host
+            - name: POSTGRES_DBNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-configmap
+                  key: postgres-dbname
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pg-initdb-config
+data:
+  initdb.sql: |
+    CREATE TABLE employees (id SERIAL, name text, title text, CONSTRAINT employees_pkey PRIMARY KEY (id));
+    INSERT INTO employees(name, title) VALUES
+    ('John Doe', 'Head of Operations'),
+    ('Alfredo B', 'Architect'),
+    ('Richarson Andre', 'Marketing Guru');
 ---
 apiVersion: v1
 kind: Service
