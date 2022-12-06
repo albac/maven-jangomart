@@ -1,0 +1,29 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-mavenjangomart-dev-224935-authRole",
+      "UnauthRoleArn": "arn:aws:iam::849514089141:role/amplify-mavenjangomart-dev-224935-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::849514089141:role/amplify-mavenjangomart-dev-224935-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-mavenjangomart-dev-224935-deployment",
+      "UnauthRoleName": "amplify-mavenjangomart-dev-224935-unauthRole",
+      "StackName": "amplify-mavenjangomart-dev-224935",
+      "StackId": "arn:aws:cloudformation:us-west-2:849514089141:stack/amplify-mavenjangomart-dev-224935/014c6750-7519-11ed-9175-0254fd741615",
+      "AmplifyAppId": "d3rmdk2krslxbg"
+    },
+    "categories": {
+      "function": {
+        "getemployees": {
+          "deploymentBucketName": "amplify-mavenjangomart-dev-224935-deployment",
+          "s3Key": "amplify-builds/getemployees-30525058385439474770-build.zip"
+        }
+      },
+      "api": {
+        "jangomartapi": {}
+      },
+      "storage": {
+        "jmemployees": {}
+      }
+    }
+  }
+}

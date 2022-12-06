@@ -1,0 +1,42 @@
+{
+  "api": {
+    "jangomartapi": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "getemployees",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
+    }
+  },
+  "storage": {
+    "jmemployees": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation"
+    }
+  },
+  "function": {
+    "getemployees": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "jmemployees",
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ]
+        }
+      ]
+    }
+  }
+}
