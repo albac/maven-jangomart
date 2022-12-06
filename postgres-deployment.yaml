@@ -54,11 +54,11 @@ metadata:
   name: pg-initdb-config
 data:
   initdb.sql: |
-    CREATE TABLE employees (id SERIAL, name text, title text, CONSTRAINT employees_pkey PRIMARY KEY (id));
+    CREATE TABLE employees (id SERIAL, name text, title text, department text CONSTRAINT employees_pkey PRIMARY KEY (id));
     INSERT INTO employees(name, title) VALUES
-    ('John Doe', 'Head of Operations'),
-    ('Alfredo B', 'Architect'),
-    ('Richarson Andre', 'Marketing Guru');
+    ('John Doe', 'Head of Operations', 'engineering'),
+    ('Alfredo B', 'DevOps Architect', 'engineering'),
+    ('Richarson Andre', 'Marketing Guru', 'marketing');
 ---
 apiVersion: v1
 kind: Service

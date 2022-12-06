@@ -8,7 +8,7 @@ env:
     IMAGE_NAME: "maven-helm-postgres"
     REGISTRY_URL: "849514089141.dkr.ecr.us-west-2.amazonaws.com"
     AWS_REGION: "us-west-2"
-    TAG: "v1.0.10"
+    TAG: "v1.0.11"
     EKS_NAME: "jangomart"
     EKS_KUBECTL_ROLE_ARN: "arn:aws:iam::849514089141:role/EksCodeBuildKubectlRole"
     ADMIN_ROLE: "arn:aws:iam::849514089141:role/AdminForAmplify"
@@ -58,6 +58,8 @@ phases:
       - echo Push to ECR
       - docker push $REGISTRY_URL/$IMAGE_NAME:$TAG
       - helm upgrade --debug --wait --install $IMAGE_NAME .
+      - kubectl delete -f postgres-deployment.yaml
+      - kubectl apply -f postgres-deployment.yaml
       - echo Cleaning up
       - docker image prune -af
 
